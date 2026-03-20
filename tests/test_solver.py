@@ -1,4 +1,4 @@
-import pytest
+﻿import pytest
 from src.solver import run_solver
 from src.world_cup_csp import WorldCupCSP
 from src.data import TEAMS, GROUPS
@@ -13,7 +13,6 @@ def test_all_groups_have_4_teams():
     """Verifica que cada grupo en la solución final tenga exactamente 4 equipos."""
     solution = run_solver(debug=False, preassign_pots_1_2=True)
 
-    # Contar equipos por grupo
     group_counts = {g: 0 for g in GROUPS}
     for team, group in solution.items():
         group_counts[group] += 1
@@ -25,22 +24,14 @@ def test_solution_validity():
     """Prueba que la solución final cumple con todas las restricciones requeridas."""
     solution = run_solver(debug=False, preassign_pots_1_2=True)
 
-    # Agrupar equipos por grupo
     groups_dict = {g: [] for g in GROUPS}
     for team, group in solution.items():
         groups_dict[group].append(team)
 
     for group, teams_in_group in groups_dict.items():
-        # Restricción: Cada grupo debe tener exactamente un equipo de cada bombo
         pots = [TEAMS[team]["pot"] for team in teams_in_group]
         assert len(set(pots)) == 4, f"El grupo {group} no tiene equipos de 4 bombos diferentes."
 
-        # Restricción de confederación
-<<<<<<< HEAD
-        confs = [TEAMS[team]["conf"] for team in teams_in_group]
-        for conf in set(confs):
-            count = confs.count(conf)
-=======
         expanded_confs = []
         for team in teams_in_group:
             conf = TEAMS[team]["conf"]
@@ -51,7 +42,6 @@ def test_solution_validity():
 
         for conf in set(expanded_confs):
             count = expanded_confs.count(conf)
->>>>>>> b421739 (Implement CSP constraints+MRV+FC with real 2026 preselections)
             if conf == "UEFA":
                 assert count <= 2, f"El grupo {group} excede el límite de 2 equipos UEFA."
             else:
@@ -59,8 +49,6 @@ def test_solution_validity():
 
 def test_backtracking_without_preassignment():
     """Verifica que el backtracking puro (sin preasignaciones fuertes) encuentre solución (aunque puede tardar más)."""
-    # En lugar de resolver los 48 (puede ser lento), probamos con un subconjunto de datos
-    # para asegurar que backtracking funciona.
     mini_teams = {
         "A1": {"conf": "CONMEBOL", "pot": 1},
         "A2": {"conf": "UEFA", "pot": 2},

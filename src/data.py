@@ -1,9 +1,5 @@
-# Datos realistas de la Copa Mundial 2026 para 48 equipos
-# 12 equipos por bombo (Pot)
-# Confederaciones: UEFA, CONMEBOL, CONCACAF, AFC, CAF, OFC
-
-TEAMS = {
-    # BOMBO 1 (Cabezas de serie)
+﻿TEAMS = {
+    # BOMBO 1
     "Argentina": {"conf": "CONMEBOL", "pot": 1},
     "France": {"conf": "UEFA", "pot": 1},
     "Brazil": {"conf": "CONMEBOL", "pot": 1},
@@ -28,12 +24,7 @@ TEAMS = {
     "Iran": {"conf": "AFC", "pot": 2},
     "Peru": {"conf": "CONMEBOL", "pot": 2},
     "Denmark": {"conf": "UEFA", "pot": 2},
-<<<<<<< HEAD
     "Canada": {"conf": "CONCACAF", "pot": 2},
-=======
-    "Ecuador": {"conf": "CONMEBOL", "pot": 2},
-    "Canada": {"conf": "CONCACAF", "pot": 1},
->>>>>>> b421739 (Implement CSP constraints+MRV+FC with real 2026 preselections)
     "South Korea": {"conf": "AFC", "pot": 2},
 
     # BOMBO 3
@@ -43,43 +34,27 @@ TEAMS = {
     "Tunisia": {"conf": "CAF", "pot": 3},
     "Algeria": {"conf": "CAF", "pot": 3},
     "Egypt": {"conf": "CAF", "pot": 3},
-<<<<<<< HEAD
-    "Ecuador": {"conf": "CONMEBOL", "pot": 3},
-=======
     "New Zealand": {"conf": "OFC", "pot": 3},
->>>>>>> b421739 (Implement CSP constraints+MRV+FC with real 2026 preselections)
     "Australia": {"conf": "AFC", "pot": 3},
     "Saudi Arabia": {"conf": "AFC", "pot": 3},
     "Costa Rica": {"conf": "CONCACAF", "pot": 3},
     "Panama": {"conf": "CONCACAF", "pot": 3},
     "Nigeria": {"conf": "CAF", "pot": 3},
+    "Ecuador": {"conf": "CONMEBOL", "pot": 3},
 
-<<<<<<< HEAD
     # BOMBO 4
-=======
-    # BOMBO 4 (incluimos placeholders para playoffs según guía)
->>>>>>> b421739 (Implement CSP constraints+MRV+FC with real 2026 preselections)
     "Mali": {"conf": "CAF", "pot": 4},
     "Ivory Coast": {"conf": "CAF", "pot": 4},
     "Qatar": {"conf": "AFC", "pot": 4},
     "Jamaica": {"conf": "CONCACAF", "pot": 4},
     "Honduras": {"conf": "CONCACAF", "pot": 4},
     "El Salvador": {"conf": "CONCACAF", "pot": 4},
-<<<<<<< HEAD
-    "New Zealand": {"conf": "OFC", "pot": 4},
-    "Uzbekistan": {"conf": "AFC", "pot": 4},
-    "Iraq": {"conf": "AFC", "pot": 4},
-    "UAE": {"conf": "AFC", "pot": 4},
-    "Cameroon": {"conf": "CAF", "pot": 4},
-    "Ghana": {"conf": "CAF", "pot": 4},
-=======
     "Playoff UEFA-A": {"conf": "UEFA", "pot": 4},
     "Playoff UEFA-B": {"conf": "UEFA", "pot": 4},
     "Playoff UEFA-C": {"conf": "UEFA", "pot": 4},
     "Playoff UEFA-D": {"conf": "UEFA", "pot": 4},
     "Playoff Inter-1": {"conf": ["CONMEBOL", "CAF", "OFC", "CONCACAF"], "pot": 4},
     "Playoff Inter-2": {"conf": ["CONMEBOL", "CONCACAF", "AFC"], "pot": 4},
->>>>>>> b421739 (Implement CSP constraints+MRV+FC with real 2026 preselections)
 }
 
 GROUPS = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L"]

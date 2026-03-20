@@ -1,4 +1,4 @@
-import copy
+﻿import copy
 from src.world_cup_csp import WorldCupCSP
 from src.data import TEAMS, GROUPS
 
@@ -10,42 +10,11 @@ def run_solver(debug=False, preassign_pots_1_2=True):
                                para simplificar el problema.
     :return: Diccionario con la asignación final o None si no hay solución.
     """
-<<<<<<< HEAD
-    csp = WorldCupCSP(TEAMS, GROUPS, debug=debug)
 
-    initial_assignment = {}
-
-    if preassign_pots_1_2:
-        # Preasignar bombo 1 a los grupos A-L.
-        pot_1_teams = [t for t, info in TEAMS.items() if info["pot"] == 1]
-        pot_2_teams = [t for t, info in TEAMS.items() if info["pot"] == 2]
-
-        # Asignar los equipos del bombo 1 a los grupos (1 equipo por grupo)
-        for i, team in enumerate(pot_1_teams):
-            if i < len(GROUPS):
-                group = GROUPS[i]
-                initial_assignment[team] = group
-                if debug:
-                    print(f"Preasignado Bombo 1: {team} -> Grupo {group}")
-
-        # Asignar los equipos del bombo 2 a los grupos
-        for i, team in enumerate(pot_2_teams):
-            if i < len(GROUPS):
-                group = GROUPS[i]
-                # Verificamos si la asignación inicial es válida con is_valid_assignment
-                if csp.is_valid_assignment(group, team, initial_assignment):
-                    initial_assignment[team] = group
-                    if debug:
-                        print(f"Preasignado Bombo 2: {team} -> Grupo {group}")
-                else:
-                    if debug:
-                        print(f"La preasignación del Bombo 2 falló para {team} en el Grupo {group}. Saltando preasignación estricta.")
-=======
     csp = WorldCupCSP(TEAMS, GROUPS, debug=debug, restrict_pots=[3, 4])
 
     initial_assignment = {}
 
-    # Preasignación real de bombos 1 y 2 (según la guía, no secuencial)
     PREASSIGNED = {
         "A": ["Mexico", "South Korea"],
         "B": ["Canada", "Japan"],
@@ -56,8 +25,8 @@ def run_solver(debug=False, preassign_pots_1_2=True):
         "G": ["Belgium", "Morocco"],
         "H": ["Spain", "Germany"],
         "I": ["France", "Senegal"],
-        "J": ["Argentina", "Switzerland"],
-        "K": ["Portugal", "Peru"],
+        "J": ["Argentina", "Ecuador"],
+        "K": ["Portugal", "Iran"],
         "L": ["Croatia", "Uruguay"],
     }
 
@@ -70,13 +39,9 @@ def run_solver(debug=False, preassign_pots_1_2=True):
                 initial_assignment[t] = group
                 if debug:
                     print(f"Preasignado {t} -> Grupo {group}")
->>>>>>> b421739 (Implement CSP constraints+MRV+FC with real 2026 preselections)
 
     print("\nIniciando Solver CSP...")
-    # Comenzar backtrack sin dominios
-    # Inicializar los dominios primero.
     domains = copy.deepcopy(csp.domains)
-    # Aplicar el forward checking con la asignación inicial para acotar el dominio inicial
     success, domains = csp.forward_check(initial_assignment, domains)
     if not success:
         if debug:
@@ -86,6 +51,7 @@ def run_solver(debug=False, preassign_pots_1_2=True):
     solution = csp.backtrack(initial_assignment, domains)
 
     return solution
+
 
 def print_solution(solution):
     """
@@ -97,7 +63,6 @@ def print_solution(solution):
 
     print("\n=== Sorteo Final de la Copa Mundial 2026 ===")
 
-    # Agrupar los equipos por grupo
     groups_dict = {g: [] for g in GROUPS}
     for team, group in solution.items():
         groups_dict[group].append(team)
@@ -106,7 +71,6 @@ def print_solution(solution):
         print(f"\nGrupo {group}:")
         teams_in_group = groups_dict[group]
 
-        # Ordenar equipos por bombo (del 1 al 4)
         teams_in_group.sort(key=lambda x: TEAMS[x]["pot"])
 
         for team in teams_in_group:
