@@ -1,20 +1,31 @@
-﻿import copy
+﻿"""
+Solver para el sorteo del Mundial 2026 usando Constraint Satisfaction Problem (CSP).
+Implementa backtracking con forward checking y heurística MRV.
+"""
+import copy
 from src.world_cup_csp import WorldCupCSP
 from src.data import TEAMS, GROUPS
+
 
 def run_solver(debug=False, preassign_pots_1_2=True):
     """
     Ejecuta el solver CSP para encontrar una asignación válida de equipos a grupos.
-    :param debug: Activa las trazas de depuración.
-    :param preassign_pots_1_2: Si es True, preasigna de forma secuencial los bombos 1 y 2
-                               para simplificar el problema.
-    :return: Diccionario con la asignación final o None si no hay solución.
-    """
 
+    Args:
+        debug: Activa las trazas de depuración (default: False).
+        preassign_pots_1_2: Si es True, preasigna los bombos 1 y 2 (default: True).
+
+    Returns:
+        Diccionario con la asignación final (equipo -> grupo) o None si no hay solución.
+
+    Raises:
+        ValueError: Si un equipo preasignado no existe en TEAMS.
+    """
     csp = WorldCupCSP(TEAMS, GROUPS, debug=debug, restrict_pots=[3, 4])
 
     initial_assignment = {}
 
+    # Preasignación de bombos 1 y 2 según 2026 World Cup propuesto
     PREASSIGNED = {
         "A": ["Mexico", "South Korea"],
         "B": ["Canada", "Japan"],
@@ -56,6 +67,9 @@ def run_solver(debug=False, preassign_pots_1_2=True):
 def print_solution(solution):
     """
     Imprime la solución agrupada por cada uno de los grupos (A-L).
+
+    Args:
+        solution: Diccionario con asignación equipo -> grupo, o None.
     """
     if not solution:
         print("No se encontró solución.")
@@ -71,6 +85,7 @@ def print_solution(solution):
         print(f"\nGrupo {group}:")
         teams_in_group = groups_dict[group]
 
+        # Ordenar por bombo
         teams_in_group.sort(key=lambda x: TEAMS[x]["pot"])
 
         for team in teams_in_group:
