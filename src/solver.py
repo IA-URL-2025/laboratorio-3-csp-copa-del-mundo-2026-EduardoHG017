@@ -18,16 +18,16 @@ def run_solver(debug=False, preassign_pots_1_2=True):
     PREASSIGNED = {
         "A": ["Mexico", "South Korea"],
         "B": ["Canada", "Japan"],
-        "C": ["Brazil", "Denmark"],
-        "D": ["USA", "Iran"],
-        "E": ["England", "Colombia"],
-        "F": ["Netherlands", "Ecuador"],
-        "G": ["Belgium", "Morocco"],
-        "H": ["Spain", "Germany"],
-        "I": ["France", "Senegal"],
-        "J": ["Argentina", "Ecuador"],
-        "K": ["Portugal", "Iran"],
-        "L": ["Croatia", "Uruguay"],
+        "C": ["Brazil", "Morocco"],
+        "D": ["USA", "Colombia"],
+        "E": ["England", "Germany"],
+        "F": ["Netherlands", "Uruguay"],
+        "G": ["Belgium", "Senegal"],
+        "H": ["Spain", "Switzerland"],
+        "I": ["France", "Iran"],
+        "J": ["Argentina", "Peru"],
+        "K": ["Portugal", "Denmark"],
+        "L": ["Croatia", "Italy"],
     }
 
     if preassign_pots_1_2:
