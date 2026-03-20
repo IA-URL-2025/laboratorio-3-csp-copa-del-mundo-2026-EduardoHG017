@@ -10,6 +10,7 @@ def run_solver(debug=False, preassign_pots_1_2=True):
                                para simplificar el problema.
     :return: Diccionario con la asignación final o None si no hay solución.
     """
+<<<<<<< HEAD
     csp = WorldCupCSP(TEAMS, GROUPS, debug=debug)
 
     initial_assignment = {}
@@ -39,6 +40,37 @@ def run_solver(debug=False, preassign_pots_1_2=True):
                 else:
                     if debug:
                         print(f"La preasignación del Bombo 2 falló para {team} en el Grupo {group}. Saltando preasignación estricta.")
+=======
+    csp = WorldCupCSP(TEAMS, GROUPS, debug=debug, restrict_pots=[3, 4])
+
+    initial_assignment = {}
+
+    # Preasignación real de bombos 1 y 2 (según la guía, no secuencial)
+    PREASSIGNED = {
+        "A": ["Mexico", "South Korea"],
+        "B": ["Canada", "Japan"],
+        "C": ["Brazil", "Denmark"],
+        "D": ["USA", "Iran"],
+        "E": ["England", "Colombia"],
+        "F": ["Netherlands", "Ecuador"],
+        "G": ["Belgium", "Morocco"],
+        "H": ["Spain", "Germany"],
+        "I": ["France", "Senegal"],
+        "J": ["Argentina", "Switzerland"],
+        "K": ["Portugal", "Peru"],
+        "L": ["Croatia", "Uruguay"],
+    }
+
+    if preassign_pots_1_2:
+        for group, teams_in_group in PREASSIGNED.items():
+            for t in teams_in_group:
+                if t not in TEAMS:
+                    raise ValueError(f"Equipo preasignado desconocido: {t}")
+
+                initial_assignment[t] = group
+                if debug:
+                    print(f"Preasignado {t} -> Grupo {group}")
+>>>>>>> b421739 (Implement CSP constraints+MRV+FC with real 2026 preselections)
 
     print("\nIniciando Solver CSP...")
     # Comenzar backtrack sin dominios

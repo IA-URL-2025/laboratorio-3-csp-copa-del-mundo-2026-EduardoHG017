@@ -36,9 +36,22 @@ def test_solution_validity():
         assert len(set(pots)) == 4, f"El grupo {group} no tiene equipos de 4 bombos diferentes."
 
         # Restricción de confederación
+<<<<<<< HEAD
         confs = [TEAMS[team]["conf"] for team in teams_in_group]
         for conf in set(confs):
             count = confs.count(conf)
+=======
+        expanded_confs = []
+        for team in teams_in_group:
+            conf = TEAMS[team]["conf"]
+            if isinstance(conf, list):
+                expanded_confs.extend(conf)
+            else:
+                expanded_confs.append(conf)
+
+        for conf in set(expanded_confs):
+            count = expanded_confs.count(conf)
+>>>>>>> b421739 (Implement CSP constraints+MRV+FC with real 2026 preselections)
             if conf == "UEFA":
                 assert count <= 2, f"El grupo {group} excede el límite de 2 equipos UEFA."
             else:
